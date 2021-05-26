@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-center m-3 font-weight-bold text-light">
+    <h2>Complaints</h2> 
+ </div>
+ <br>
+ <br>
+ 
+ <div class="m-3">
+     <table class="table table-striped text-light">
+         <thead>
+           <tr>
+             <th scope="col">Sr.</th>
+             <th scope="col">Name</th>
+             <th scope="col">Landmark</th>
+             <th scope="col">Address</th>
+             <th scope="col">City</th>
+             <th scope="col">Image</th>
+             <th scope="col">Complaint Type</th>      
+             <th scope="col">Complaint Level</th>
+             <th scope="col">Action</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let complaint of Complaints; let Counter = index">
+              
+             <th scope="row">{{Counter+1}}</th>
+             <td>{{complaint.name}}</td>
+             <td>{{complaint.landmark}}</td>
+             <td>{{complaint.address}}</td>
+             <td>{{complaint.city}}</td>
+             <td>
+                 <img src={{complaint.complaint_image}} height="100px" width="100px">
+             </td>
+             <td>{{complaint.complaint_type}}</td>
+             <td>{{complaint.complaint_level}}</td>
+             <td>
+                 <button routerLink="{{'/officer-complaint-status/'+complaint._id}}" class="btn btn-primary" type="button">View Status</button>
+             </td>           
+           </tr>
+         </tbody>
+     </table>
+ </div>

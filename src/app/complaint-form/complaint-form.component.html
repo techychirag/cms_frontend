@@ -1,0 +1,113 @@
+<div class="container text-white">
+
+    <h2 class="text-center p-3">User Complaint</h2>
+
+
+    <div *ngIf="RegSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Success!</strong> Complaint Successfully Post! 
+      <button (click)="closeSuccessAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div *ngIf="somthingWrong" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Danger!</strong> Something went wrong
+      <button (click)="closeDangerAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+
+  
+  <form class="m-2" [formGroup]="complaintForm" (ngSubmit)="onComplaintsSubmit()">
+      <div class="form-group">
+        <label for="Name">Name</label>
+        <input formControlName="Name"  type="text" class="form-control" id="name" placeholder="Enter your name">
+        <span
+        *ngIf="!complaintForm.get('Name').valid && complaintForm.get('Name').touched"
+         class="text-danger">Enter name here... </span>
+      </div>
+
+      <div class="form-group">
+        <label for="Landmark">Landmark</label>
+        <input formControlName="Landmark" class="form-control" id="Landmark" rows="3" placeholder="Enter your landmark">
+        <span
+          *ngIf="!complaintForm.get('Landmark').valid && complaintForm.get('Landmark').touched"
+           class="text-danger">Enter landmark here... </span>
+       </div>
+
+       <div class="form-group">
+        <label for="Address">Address</label>
+        <input formControlName="Address" class="form-control" id="Address" rows="3" placeholder="Enter your address">
+        <span
+          *ngIf="!complaintForm.get('Address').valid && complaintForm.get('Address').touched"
+           class="text-danger">Enter address here... </span>
+       </div>
+
+       <div class="form-group">
+        <label for="City">City</label>
+        <input formControlName="City" class="form-control" id="City" rows="3" placeholder="Enter your city">
+        <span
+          *ngIf="!complaintForm.get('City').valid && complaintForm.get('City').touched"
+           class="text-danger">Enter city here... </span>
+       </div>
+
+       
+        
+       <br>
+       <select formControlName="Complaint_Type" name="Complaint_Type" class="form-control form-select" (change)="onChangeComplaintType($event)">
+          
+        <option value=null selected>Select complaint type</option>
+        <option *ngFor="let Complaint of Complaints" [value]="Complaint.Id">
+            {{Complaint.Name}}
+          </option>
+          
+       </select>
+       <br>
+       
+
+       <div class="form-group">
+        <label for="Complaint">Complaint</label>
+        <input formControlName="Complaint" class="form-control" id="Complaint" rows="3" placeholder="Enter your complaint">
+        <span
+          *ngIf="!complaintForm.get('Complaint').valid && complaintForm.get('Complaint').touched"
+           class="text-danger">Enter complaint here... </span>
+       </div>
+
+       <br>
+
+       <select formControlName="Complaint_Level" name="Complaint_Level" class="form-control form-select" (change)="onChangeComplaintLevel($event)" >
+        <option value=null selected>Select complaint Level</option>
+        <option *ngFor="let ComplaintLevel of ComplaintLevels" [value]="ComplaintLevel.Id">
+            {{ComplaintLevel.Level}}
+          </option>
+          
+       </select>
+        
+      <br>
+
+      <div class="form-group">
+        <label >Upload Image</label>
+        <input formControlName="Complaint_Image" type="file"(change)="onImageSelected($event)" class="form-control" name="Complaint_Image">
+        <span
+          *ngIf="!complaintForm.get('Complaint_Image').valid && complaintForm.get('Complaint_Image').touched"
+           class="text-danger">Please choose only image... </span>
+           <span
+          *ngIf="imageSizeError"
+           class="text-danger">Please insert Below 1MB File Size.  </span>
+    </div>
+
+     <!-- Image Preview -->
+  <div class="imagePreview" *ngIf="imageURL && imageURL !== ''">
+    <img [src]="imageURL" height="150px" width="150px" [alt]="complaintForm.value.name">
+  </div>
+
+     <br>
+
+     
+
+       <button type="reset" class="btn btn-danger">Reset</button>
+       <button type="submit"  class="btn btn-primary m-3">Register</button>
+  </form>
+  
+</div>  

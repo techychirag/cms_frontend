@@ -1,0 +1,57 @@
+<div class="container text-white">
+
+    <h2 class="text-center p-3">Officer Login</h2>
+    
+  
+    <div *ngIf="somthingWrong" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Danger!</strong> Something went wrong
+      <button (click)="closeDangerAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  
+  
+  <form class="m-5" [formGroup]="OfficerLoginForm" (ngSubmit)="onOfficerLoginSubmit()">
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input formControlName="Email" type="email" class="form-control" id="email" name="email" placeholder="Enter your email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+        <span
+        *ngIf="!OfficerLoginForm.get('Email').valid && OfficerLoginForm.get('Email').touched"
+         class="text-danger">Enter email here... </span>
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input formControlName="Password" type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+        <span
+        *ngIf="!OfficerLoginForm.get('Password').valid && OfficerLoginForm.get('Password').touched"
+         class="text-danger">Enter Password here... </span>
+  
+    </div>
+    <br>
+    <select formControlName="Location" name="Location" class="form-control form-select" (change)="onChangeLocation($event)">
+       
+     <option value=null selected>Select Location</option>
+     <option *ngFor="let Location of Locations" [value]="Location.Id">
+         {{Location.Name}}
+       </option>
+       
+    </select>
+    <br>
+
+    <br>
+       <select formControlName="Department" name="Department" class="form-control form-select" (change)="onChangeDepartment($event)">
+          
+        <option value=null selected>Select Department</option>
+        <option *ngFor="let Department of Departments" [value]="Department.Id">
+            {{Department.Name}}
+          </option>
+          
+       </select>
+       <br>
+     
+       <button type="reset" class="btn btn-danger">Reset</button>
+       <button type="submit" class="btn btn-primary m-3">Login</button>
+  </form>
+  </div>     

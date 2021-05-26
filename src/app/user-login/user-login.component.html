@@ -1,0 +1,43 @@
+<div class="container text-white">
+
+  <h2 class="text-center p-3">User Login</h2>
+  
+
+  <div *ngIf="somthingWrong" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Danger!</strong> Something went wrong
+    <button (click)="closeDangerAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+
+<form class="m-5" [formGroup]="LoginForm" (ngSubmit)="onLoginSubmit()">
+    
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input formControlName="Email" type="email" class="form-control" id="email" name="email" placeholder="Enter your email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+      <span
+      *ngIf="!LoginForm.get('Email').valid && LoginForm.get('Email').touched"
+       class="text-danger">Enter email here... </span>
+
+       <div  *ngIf="EmailWrongError" class="text-danger">
+        Sorry email is not registred!
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input formControlName="Password" type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+      <span
+      *ngIf="!LoginForm.get('Password').valid && LoginForm.get('Password').touched"
+       class="text-danger">Enter Password here... </span>
+       <div *ngIf="PasswordWrongError" class="text-danger">
+        Password is wrong!
+      </div>
+
+  </div>
+   
+     <button type="reset" class="btn btn-danger">Reset</button>
+     <button type="submit" class="btn btn-primary m-3">Login</button>
+</form>
+</div>     

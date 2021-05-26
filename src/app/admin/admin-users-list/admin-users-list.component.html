@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <br>
+    <div class="text-light text-center m-3">
+        <h3>Users List</h3>
+    </div>
+
+    <br>
+    <div class="text-light m-3">
+            <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Sr.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th> 
+                <th scope="col">Mobile Number</th>                    
+                <th scope="col">Address</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let user of Users | paginate:{itemsPerPage:5,currentPage:p  } ; let Counter = index;">
+
+                <td>{{Counter+1}}</td>
+
+                <td>{{user.firstname}}  {{user.lastname}} </td>
+
+                <td>
+                        {{user.email}}
+                </td>
+
+                <td>
+                    +91 {{user.mobile_number}}
+                </td>
+                
+                <td>                
+                        {{user.address}}
+                </td>  
+                
+                <td>
+                    <button class="btn btn-danger m-1" (click)="deleteUser(user)">Delete</button>
+                </td>
+            </tr>
+            
+            <!-- Pagination start here -->
+            <pagination-controls (pageChange)="p=$event"></pagination-controls>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

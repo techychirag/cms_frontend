@@ -1,0 +1,98 @@
+<div class="container-fluid">
+    <br>
+    <div class="text-light text-center m-3">
+        <h3>All Department Report</h3>
+    </div>
+
+    <br>
+    <div class="text-light m-3">
+        
+        <table>
+            <tr>
+              <td><h4><b>Pending :   </b> </h4></td>
+              <td><h5>{{PendingCount}}</h5></td>
+            </tr>
+
+            <tr>
+                <td><h4><b>On Progress :   </b> </h4></td>
+                <td><h5>{{OnProgressCount}}</h5></td>
+            </tr>
+
+            <tr>
+                <td><h4><b>Rejected :   </b> </h4></td>
+                <td><h5>{{RejectedCount}}</h5></td>
+            </tr>
+
+            <tr>
+                <td><h4><b>Completed :   </b> </h4></td>
+                <td><h5>{{CompletedCount}}</h5></td>
+            </tr>
+              
+          </table>
+    </div>
+
+    <br>
+    <div class="text-light text-center m-3">
+        <h3>Search By City</h3>
+        <br>
+
+
+      <nav class="navbar">
+        <input class="form-control" name="city" placeholder="Enter city name" [(ngModel)]="city" (ngModelChange)="searchCity()">
+      </nav>
+      <br>
+      <br>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Sr.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Landmark</th>
+                <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">Image</th>
+                <th scope="col">Type</th>      
+                <th scope="col">Level</th>
+                <th scope="col">Status</th>  
+                <th scope="col">Officer Proof</th> 
+                <th scope="col">Reason</th> 
+                <th scope="col">Solution</th>    
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let complaint of ComplaintsCopy | paginate:{itemsPerPage:5,currentPage:p}; let Counter = index; ">
+              
+                    <th scope="row">{{Counter+1}}</th>
+                    <td>{{complaint.name}}</td>
+                    <td>{{complaint.landmark}}</td>
+                    <td>{{complaint.address}}</td>
+                    <td>{{complaint.city}}</td>
+                    <td>
+                        <img src={{complaint.complaint_image}} height="100px" width="100px">
+                    </td>
+                    <td>{{complaint.complaint_type}}</td>
+                    <td>{{complaint.complaint_level}}</td>
+                    <td>{{complaint.complaint_status}}</td>
+                    <td>
+                        <div *ngIf="complaint.officer_proof; else NoImageUploads">
+                          <img src={{complaint.officer_proof}} height="100px" width="100px">
+                        </div>
+                        <ng-template #NoImageUploads>
+                          Image Not Uploaded
+                        </ng-template>
+                        
+                    </td>
+
+                    <td>{{complaint.reason}}</td>
+                    <td>{{complaint.solution}}</td>
+                  </tr>
+
+                  <pagination-controls (pageChange)="p=$event"></pagination-controls>
+            </tbody>
+          </table>
+    
+    </div>
+
+    
+   
+</div>

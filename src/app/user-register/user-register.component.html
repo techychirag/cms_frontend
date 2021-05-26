@@ -1,0 +1,76 @@
+<div class="container text-white">
+
+      <h2 class="text-center p-3">User Registration</h2>
+
+
+      <div *ngIf="RegSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> You are now registered 
+        <button (click)="closeSuccessAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div *ngIf="somthingWrong" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Danger!</strong> Something went wrong
+        <button (click)="closeDangerAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+
+    
+    <form class="m-5" [formGroup]="RegistrationForm" (ngSubmit)="onRegisterSubmit()">
+        <div class="form-group">
+          <label for="firstname">First Name</label>
+          <input formControlName="FirstName"  type="text" class="form-control" id="firstname" placeholder="Enter your first name">
+          <span
+          *ngIf="!RegistrationForm.get('FirstName').valid && RegistrationForm.get('FirstName').touched"
+           class="text-danger">Enter first name here.. </span>
+        </div>
+        <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input formControlName="LastName"  type="text" class="form-control" id="lastname" placeholder="Enter your last name">
+            <span
+            *ngIf="!RegistrationForm.get('LastName').valid && RegistrationForm.get('LastName').touched"
+             class="text-danger">Enter last name here.. </span>
+          </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input formControlName="Email"  type="email" class="form-control" id="email" placeholder="Enter your email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+          <span
+          *ngIf="!RegistrationForm.get('Email').valid && RegistrationForm.get('Email').touched"
+           class="text-danger">Enter valid email here.. </span>
+           <div  *ngIf="EmailIsUsedError" class="text-danger">
+            Sorry email is already in use!
+          </div>
+           
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input formControlName="Password" type="password" class="form-control" id="password" placeholder="Enter your email">
+            <span
+          *ngIf="!RegistrationForm.get('Password').valid && RegistrationForm.get('Password').touched"
+           class="text-danger">Password must be at least 5 characters. </span>
+
+          </div>
+        <div class="form-group">
+            <label for="mobile_number">Mobile Number</label>
+            <input formControlName="MobileNumber"  type="number" class="form-control" id="mobile_number" placeholder="Enter your mobile number">
+            <span
+            *ngIf="!RegistrationForm.get('MobileNumber').valid && RegistrationForm.get('MobileNumber').touched"
+             class="text-danger">Enter mobile number here </span>
+        </div>
+
+        
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea formControlName="Address" class="form-control" id="address" rows="3" placeholder="Enter your address"></textarea>
+          <span
+            *ngIf="!RegistrationForm.get('Address').valid && RegistrationForm.get('Address').touched"
+             class="text-danger">Enter address here </span>
+         </div>
+         
+         <button type="reset" class="btn btn-danger">Reset</button>
+         <button type="submit"  class="btn btn-primary m-3">Register</button>
+    </form>
+</div>  

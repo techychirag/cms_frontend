@@ -1,0 +1,120 @@
+<div class="container">
+    <br>
+    <div class="text-light text-center m-3">
+        <h3>Complaint Status</h3>
+    </div>
+
+    <div class="text-light m-3">
+
+
+        <h4><b>Name </b> </h4>
+        <h5>
+            <div>
+                <span>{{Complaint_Status.name}}</span>
+            </div>
+        </h5>
+        <br/>
+
+        <h4><b>Status </b> </h4>
+        <h5>
+            <div *ngIf="Complaint_Status.isEdit">
+
+                <select  class="form-control form-select" (change)="onChangeComplaintStatus($event)">
+                    <option value=null selected>Select complaint Level</option>
+                    <option *ngFor="let Status of Complaint_Status_Array" [value]="Status.Name">
+                        {{Status.Name}}
+                      </option>
+                      
+                </select>
+            </div>
+        
+            <div *ngIf="!Complaint_Status.isEdit">
+                <span>{{Complaint_Status.complaint_status}}</span>
+            </div>
+        </h5>
+        <br/>
+
+
+
+        <h4><b>Complaint Image </b> </h4>
+        <h5>
+            <img src={{Complaint_Status.complaint_image}} width="200" height="200">
+        </h5>
+        <br/>
+
+        <h4><b>Reason </b> </h4>
+        <h5>
+            <div *ngIf="Complaint_Status.isEdit">
+                <input type="text" [(ngModel)]="Complaint_Status.reason">
+            </div>
+        
+            <div *ngIf="!Complaint_Status.isEdit">
+                <span>{{Complaint_Status.reason}}</span>
+            </div>
+        </h5>
+        <br/>
+
+        <h4><b>Solutions </b> </h4>
+        <h5>
+            <div *ngIf="Complaint_Status.isEdit">
+                <input type="text" [(ngModel)]="Complaint_Status.solution">
+            </div>
+        
+            <div *ngIf="!Complaint_Status.isEdit">
+                <span>{{Complaint_Status.solution}}</span>
+            </div>
+        </h5>
+        <br/>
+
+        <h4><b>Complaint Proof </b> </h4>
+        <h5>
+            <div *ngIf="Complaint_Status.isEdit">
+            
+                    <label >Upload An Image</label>
+                    <br>
+                    <input type="file" (change)="onImageSelected($event)" >  
+            </div>
+
+            <div *ngIf="!Complaint_Status.isEdit && Complaint_Status.officer_proof">
+                <img src={{Complaint_Status.officer_proof}} width="200" height="200">
+            </div>
+
+           
+        </h5>
+
+
+                    <!-- Image Preview -->
+            <div class="imagePreview" *ngIf="imageURL && imageURL !== ''">
+                <img [src]="imageURL" height="150px" width="150px" >
+            </div>
+
+            <div *ngIf="Complaint_Status.isEdit"> 
+                <span
+                  *ngIf="imageSizeError"
+                   class="text-danger">Please insert Below 1MB File Size.  
+                </span>
+            </div>
+            <div *ngIf="Complaint_Status.isEdit"> 
+                <span
+                  *ngIf="fileTypeError"
+                   class="text-danger">Please insert Only JPEG and PNG File.  
+                </span>
+            </div>
+     
+        <br/>
+    
+
+    
+
+            <h4><b>Action : </b></h4>
+            <div  *ngIf="!Complaint_Status.isEdit">
+                <button class="btn btn-info m-1" (click)="isEdit(Complaint_Status)">Edit</button>
+            </div>
+            <div *ngIf="Complaint_Status.isEdit">
+                <button class="btn btn-success m-1" (click)="update(Complaint_Status)">Update</button>
+                <button class="btn btn-primary m-1" (click)="cancel(Complaint_Status)">Cancel</button>
+            </div>
+
+              
+   </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container">
+        <br>
+        <div class="text-light text-center m-3">
+            <h3>Complaint Status</h3>
+        </div>
+
+        <div class="text-light m-3">
+
+
+        <h4><b>Name : </b> <span>{{Complaint_Status.name}}</span></h4>  <br/>
+        <h4><b>Status : </b> <span>{{Complaint_Status.complaint_status}}</span> </h4>  <br/>
+        <h4><b>Complaint Image : </b> <img src={{Complaint_Status.complaint_image}} width="200" height="200"> </h4> <br/>
+
+        <div *ngIf="Complaint_Status.reason">
+            <h4><b>Reason : </b><span>{{Complaint_Status.reason}}</span></h4>  <br/>
+            <h4><b>Solutions : </b> <span>{{Complaint_Status.solution}}</span></h4>  <br/>
+            <h4><b>Complaint Proof : </b> <img src={{Complaint_Status.officer_proof}} width="200" height="200"> </h4> <br/>
+        </div>
+
+        </div>
+</div>
+
+

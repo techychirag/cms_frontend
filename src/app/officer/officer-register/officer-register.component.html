@@ -1,0 +1,81 @@
+<div class="container text-white">
+
+  <h2 class="text-center p-3">Create Officer Account</h2>
+
+
+  <div *ngIf="RegSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> You are now created 
+    <button (click)="closeSuccessAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div *ngIf="somthingWrong" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Danger!</strong> Something went wrong
+    <button (click)="closeDangerAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+
+
+<form class="m-5" [formGroup]="OfficerRegisterForm" (ngSubmit)="onOfficerRegisterSubmit()">
+    <div class="form-group">
+      <label for="firstname">Name</label>
+      <input formControlName="Name"  type="text" class="form-control" id="firstname" placeholder="Enter your first name">
+      <span
+      *ngIf="!OfficerRegisterForm.get('Name').valid && OfficerRegisterForm.get('Name').touched"
+       class="text-danger">Enter first name here.. </span>
+    </div>
+   
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input formControlName="Email"  type="email" class="form-control" id="email" placeholder="Enter your email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+      <span
+      *ngIf="!OfficerRegisterForm.get('Email').valid && OfficerRegisterForm.get('Email').touched"
+       class="text-danger">Enter valid email here.. </span>
+       
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input formControlName="Password" type="password" class="form-control" id="password" placeholder="Enter your email">
+        <span
+      *ngIf="!OfficerRegisterForm.get('Password').valid && OfficerRegisterForm.get('Password').touched"
+       class="text-danger">Password must be at least 5 characters. </span>
+
+      </div>
+    <div class="form-group">
+        <label for="mobile_number">Mobile Number</label>
+        <input formControlName="MobileNumber"  type="number" class="form-control" id="mobile_number" placeholder="Enter your mobile number">
+        <span
+        *ngIf="!OfficerRegisterForm.get('MobileNumber').valid && OfficerRegisterForm.get('MobileNumber').touched"
+         class="text-danger">Enter mobile number here </span>
+    </div>
+
+    
+    <br>
+    <select formControlName="Location" name="Location" class="form-control form-select" (change)="onChangeLocation($event)">
+       
+     <option value=null selected>Select Location</option>
+     <option *ngFor="let Location of Locations" [value]="Location.Id">
+         {{Location.Name}}
+       </option>
+       
+    </select>
+    <br>
+
+    <br>
+       <select formControlName="Department" name="Department" class="form-control form-select" (change)="onChangeDepartment($event)">
+          
+        <option value=null selected>Select Department</option>
+        <option *ngFor="let Department of Departments" [value]="Department.Id">
+            {{Department.Name}}
+          </option>
+          
+       </select>
+       <br>
+     
+     <button type="reset" class="btn btn-danger">Reset</button>
+     <button type="submit"  class="btn btn-primary m-3">Register</button>
+</form>
+</div>  
